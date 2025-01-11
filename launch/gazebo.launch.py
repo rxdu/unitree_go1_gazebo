@@ -74,10 +74,10 @@ def launch_setup(context, *args, **kwargs):
                    'robot', '-allow_renaming', 'true', '-z', init_height],
     )
 
-    leg_pd_controller = Node(
+    leg_joint_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["leg_pd_controller",
+        arguments=["leg_joint_controller",
                    "--controller-manager", "/controller_manager"],
     )
 
@@ -113,7 +113,9 @@ def launch_setup(context, *args, **kwargs):
         gz_spawn_sdf,
         robot_state_publisher,
         gz_spawn_robot,
-        # leg_pd_controller,
+        joint_state_publisher,
+        imu_sensor_broadcaster,
+        leg_joint_controller
         # RegisterEventHandler(
         #     event_handler=OnProcessExit(
         #         target_action=leg_pd_controller,

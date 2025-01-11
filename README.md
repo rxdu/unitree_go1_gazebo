@@ -7,6 +7,8 @@ the real robot, allowing users to easily develop programs with the simulation fi
   package.
 * The GO1 model is based on go1_description package from [unitree_ros](https://github.com/unitreerobotics/unitree_ros)
   package.
+* The LegJointController is based on the leg_pd_controller
+  from [quadruped_ros2_control](https://github.com/legubiao/quadruped_ros2_control) package.
 
 This repository also serves as a reference for creating a Gazebo simulation for any robot.
 
@@ -23,7 +25,7 @@ The following platforms are supported and tested:
 * Install ROS and Gazebo Harmonic
 
 You may refer to the [official ROS installation guide](https://docs.ros.org/en/jazzy/Installation.html) for the
-installation of ROS Jazzy. 
+installation of ROS Jazzy.
 
 Follow the following steps to install Gazebo Harmonic:
 
@@ -38,9 +40,18 @@ sudo apt-get install gz-harmonic
 
 * Install the ROS dependencies
 
+Since the robot dog has a lot of joints (3 per leg, 12 in total), it is recommended to use the `ros2_control` framework
+for the control interface
+
 ```bash
-$ cd <directory_of_the_colcon_workspace>
-$ rosdep install --from-paths src -y --ignore-src
+sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
+```
+
+Additional dependencies can be installed with rosdep:
+
+```bash
+cd <directory_of_the_colcon_workspace>
+rosdep install --from-paths src -y --ignore-src
 ```
 
 ## Gazebo simulation setup

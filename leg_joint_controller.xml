@@ -1,0 +1,10 @@
+<library path="leg_joint_controller">
+    <class name="leg_joint_controller/LegJointController"
+           type="leg_joint_controller::LegJointController"
+           base_class_type="controller_interface::ChainableControllerInterface">
+        <description>
+            A joint-level PD controller that mimics the behavior of the real robot leg joints.
+                torque = kp (pos_target - pos) + kd (vel_target - vel) + torque_target
+        </description>
+    </class>
+</library>

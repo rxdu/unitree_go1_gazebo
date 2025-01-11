@@ -17,9 +17,13 @@
     </xacro:include>
     <xacro:if value="$(arg GAZEBO)">
         <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/gazebo.xacro"/>
+        <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/ros2_control.xacro"/>
     </xacro:if>
 
     <!-- robot base links -->
+    <!-- Rotor related joints and links are only for location indication. -->
+    <!-- The rotor will rotate and the joint is not fixed. Reduction ratio should be considered. -->
+
     <xacro:if value="$(arg DEBUG)">
         <link name="world"/>
         <joint name="base_static_joint" type="fixed">
