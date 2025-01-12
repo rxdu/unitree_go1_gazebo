@@ -105,6 +105,15 @@
             <state_interface name="linear_acceleration.y"/>
             <state_interface name="linear_acceleration.z"/>
         </sensor>
+
+        <sensor name="fr_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
     </ros2_control>
 
     <gazebo>
@@ -113,6 +122,7 @@
         </plugin>
 
         <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+        <plugin filename="gz-sim-forcetorque-system" name="gz::sim::systems::ForceTorque"/>
     </gazebo>
 
     <gazebo reference="imu_link">
@@ -175,6 +185,19 @@
                     </z>
                 </linear_acceleration>
             </imu>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="FR_foot_fixed">
+        <sensor name="fr_ft_sensor" type="force_torque">
+            <always_on>1</always_on>
+            <update_rate>500</update_rate>
+            <visualize>true</visualize>
+            <topic>FR_joint/force_torque</topic>
+            <force_torque>
+                <frame>parent</frame>
+                <measure_direction>child_to_parent</measure_direction>
+            </force_torque>
         </sensor>
     </gazebo>
 

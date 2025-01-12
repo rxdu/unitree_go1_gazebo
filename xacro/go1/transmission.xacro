@@ -37,6 +37,18 @@
             </actuator>
         </transmission>
 
+        <transmission name="${name}_foot_ft_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}_foot_fixed">
+                <hardwareInterfaces>
+                    <hardwareInterface>hardware_interface/ForceTorqueSensorInterface</hardwareInterface>
+                </hardwareInterfaces>
+            </joint>
+            <actuator name="${name}_foot_ft_actuator">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
     </xacro:macro>
 
 </robot>

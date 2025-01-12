@@ -10,6 +10,9 @@ controller_manager:
     imu_sensor_broadcaster:
       type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
+    fr_ft_sensor_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
     leg_joint_controller:
       type: leg_joint_controller/LegJointController
 
@@ -20,6 +23,20 @@ imu_sensor_broadcaster:
   ros__parameters:
     sensor_name: "imu_sensor"
     frame_id: "imu_link"
+
+fr_ft_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: "fr_ft_sensor"
+    frame_id: "FR_foot_fixed"
+#    interface_names:
+#      force:
+#        x: "force_torque_sensor_broadcaster/fr_ft_sensor/force.x"
+#        y: "force_torque_sensor_broadcaster/fr_ft_sensor/force.y"
+#        z: "force_torque_sensor_broadcaster/fr_ft_sensor/force.z"
+#      torque:
+#        x: "force_torque_sensor_broadcaster/fr_ft_sensor/torque.x"
+#        y: "force_torque_sensor_broadcaster/fr_ft_sensor/torque.y"
+#        z: "force_torque_sensor_broadcaster/fr_ft_sensor/torque.z"
 
 leg_joint_controller:
   ros__parameters:

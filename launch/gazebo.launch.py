@@ -52,7 +52,7 @@ def launch_setup(context, *args, **kwargs):
         ],
     )
 
-    joint_state_publisher = Node(
+    joint_state_broadcaster = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster",
@@ -64,6 +64,13 @@ def launch_setup(context, *args, **kwargs):
         executable="spawner",
         arguments=["imu_sensor_broadcaster",
                    "--controller-manager", "/controller_manager"]
+    )
+
+    force_torque_sensor_broadcaster = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["fr_ft_sensor_broadcaster",
+                     "--controller-manager", "/controller_manager"]
     )
 
     gz_spawn_robot = Node(
@@ -109,17 +116,20 @@ def launch_setup(context, *args, **kwargs):
 
     return [
         rviz,
+        robot_state_publisher,
+        # gazebo
         gz_bridge,
         gz_spawn_sdf,
-        robot_state_publisher,
         gz_spawn_robot,
-        joint_state_publisher,
+        # ros2_control
+        joint_state_broadcaster,
         imu_sensor_broadcaster,
+        force_torque_sensor_broadcaster,
         leg_joint_controller
         # RegisterEventHandler(
         #     event_handler=OnProcessExit(
         #         target_action=leg_pd_controller,
-        #         on_exit=[imu_sensor_broadcaster, joint_state_publisher, unitree_sdk2_adapter],
+        #         on_exit=[imu_sensor_broadcaster, joint_state_broadcaster, unitree_sdk2_adapter],
         #     )
         # ),
     ]

@@ -2,12 +2,12 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="ultrasound" params="name *origin">
-        <joint name="ultraSound_joint_${name}" type="fixed">
+        <joint name="ultrasound_joint_${name}" type="fixed">
             <xacro:insert_block name="origin"/>
             <parent link="trunk"/>
-            <child link="ultraSound_${name}"/>
+            <child link="ultrasound_${name}"/>
         </joint>
-        <link name="ultraSound_${name}">
+        <link name="ultrasound_${name}">
             <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
