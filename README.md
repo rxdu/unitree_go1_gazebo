@@ -10,8 +10,7 @@ the real robot, allowing users to easily develop programs with the simulation fi
 * The LegJointController is based on the LegPdController from
   the [quadruped_ros2_control](https://github.com/legubiao/quadruped_ros2_control) package.
 
-<img src="docs/screenshots/go1_gazebo.png" height="200">
-<img src="docs/screenshots/go1_ft_sensor.png" height="200">
+<img src="docs/screenshots/go1_gazebo.png" height="250"> <img src="docs/screenshots/go1_ft_sensor.png" height="250">
 
 This repository also serves as a reference for creating a Gazebo simulation for any robot. You can find
 documentation of the simulation setup process in [SETUP.md](docs/SETUP.md).
