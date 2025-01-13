@@ -17,7 +17,7 @@ def launch_setup(context, *args, **kwargs):
     pkg_shared_directory = get_package_share_directory('unitree_go1_gazebo')
 
     xacro_file = os.path.join(pkg_shared_directory, 'xacro', 'robot.xacro')
-    rviz_config_file = os.path.join(pkg_shared_directory, "rviz", "go1_model.rviz")
+    rviz_config_file = os.path.join(pkg_shared_directory, "rviz", "go1_sim.rviz")
     gz_bridge_config_file = os.path.join(pkg_shared_directory, 'config', 'gz_bridge.yaml')
     world_file = os.path.join(pkg_shared_directory, 'worlds', 'empty.sdf')
 
@@ -66,11 +66,32 @@ def launch_setup(context, *args, **kwargs):
                    "--controller-manager", "/controller_manager"]
     )
 
-    force_torque_sensor_broadcaster = Node(
+    fr_ft_sensor_broadcaster = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["fr_ft_sensor_broadcaster",
                      "--controller-manager", "/controller_manager"]
+    )
+
+    fl_ft_sensor_broadcaster = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["fl_ft_sensor_broadcaster",
+                   "--controller-manager", "/controller_manager"]
+    )
+
+    rr_ft_sensor_broadcaster = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["rr_ft_sensor_broadcaster",
+                   "--controller-manager", "/controller_manager"]
+    )
+
+    rl_ft_sensor_broadcaster = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["rl_ft_sensor_broadcaster",
+                   "--controller-manager", "/controller_manager"]
     )
 
     gz_spawn_robot = Node(
@@ -124,7 +145,10 @@ def launch_setup(context, *args, **kwargs):
         # ros2_control
         joint_state_broadcaster,
         imu_sensor_broadcaster,
-        force_torque_sensor_broadcaster,
+        fr_ft_sensor_broadcaster,
+        fl_ft_sensor_broadcaster,
+        rr_ft_sensor_broadcaster,
+        rl_ft_sensor_broadcaster,
         leg_joint_controller
         # RegisterEventHandler(
         #     event_handler=OnProcessExit(
@@ -138,7 +162,7 @@ def launch_setup(context, *args, **kwargs):
 def generate_launch_description():
     height = DeclareLaunchArgument(
         'height',
-        default_value='0.5',
+        default_value='0.8',
         description='Init height in simulation'
     )
 

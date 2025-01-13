@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/ft_sensor.xacro"/>
+
     <ros2_control name="GazeboSimSystem" type="system">
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -106,7 +108,34 @@
             <state_interface name="linear_acceleration.z"/>
         </sensor>
 
-        <sensor name="fr_ft_sensor">
+        <sensor name="FR_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
+
+        <sensor name="FL_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
+
+        <sensor name="RR_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
+
+        <sensor name="RL_ft_sensor">
             <state_interface name="force.x"/>
             <state_interface name="force.y"/>
             <state_interface name="force.z"/>
@@ -188,17 +217,9 @@
         </sensor>
     </gazebo>
 
-    <gazebo reference="FR_foot_fixed">
-        <sensor name="fr_ft_sensor" type="force_torque">
-            <always_on>1</always_on>
-            <update_rate>500</update_rate>
-            <visualize>true</visualize>
-            <topic>FR_joint/force_torque</topic>
-            <force_torque>
-                <frame>parent</frame>
-                <measure_direction>child_to_parent</measure_direction>
-            </force_torque>
-        </sensor>
-    </gazebo>
+    <xacro:ft_sensor name="FR"/>
+    <xacro:ft_sensor name="FL"/>
+    <xacro:ft_sensor name="RR"/>
+    <xacro:ft_sensor name="RL"/>
 
 </robot>
