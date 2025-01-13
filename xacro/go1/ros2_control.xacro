@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/ft_sensor.xacro"/>
+
     <ros2_control name="GazeboSimSystem" type="system">
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -105,6 +107,42 @@
             <state_interface name="linear_acceleration.y"/>
             <state_interface name="linear_acceleration.z"/>
         </sensor>
+
+        <sensor name="FR_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
+
+        <sensor name="FL_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
+
+        <sensor name="RR_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
+
+        <sensor name="RL_ft_sensor">
+            <state_interface name="force.x"/>
+            <state_interface name="force.y"/>
+            <state_interface name="force.z"/>
+            <state_interface name="torque.x"/>
+            <state_interface name="torque.y"/>
+            <state_interface name="torque.z"/>
+        </sensor>
     </ros2_control>
 
     <gazebo>
@@ -113,6 +151,7 @@
         </plugin>
 
         <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+        <plugin filename="gz-sim-forcetorque-system" name="gz::sim::systems::ForceTorque"/>
     </gazebo>
 
     <gazebo reference="imu_link">
@@ -177,5 +216,10 @@
             </imu>
         </sensor>
     </gazebo>
+
+    <xacro:ft_sensor name="FR"/>
+    <xacro:ft_sensor name="FL"/>
+    <xacro:ft_sensor name="RR"/>
+    <xacro:ft_sensor name="RL"/>
 
 </robot>

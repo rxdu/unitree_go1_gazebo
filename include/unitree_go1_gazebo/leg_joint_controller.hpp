@@ -5,11 +5,8 @@
 #ifndef LEG_JOINT_CONTROLLER_HPP
 #define LEG_JOINT_CONTROLLER_HPP
 
-#include <realtime_tools/realtime_buffer.h>
-
-#include <controller_interface/chainable_controller_interface.hpp>
 #include <controller_interface/controller_interface.hpp>
-#include <std_msgs/msg/float64_multi_array.hpp>
+#include <controller_interface/chainable_controller_interface.hpp>
 
 namespace leg_joint_controller {
 class LegJointController final
@@ -59,9 +56,6 @@ class LegJointController final
   std::vector<std::string> joint_names_;
   std::vector<std::string> state_interface_types_;
   std::vector<std::string> reference_interface_types_;
-  realtime_tools::RealtimeBuffer<
-      std::shared_ptr<std_msgs::msg::Float64MultiArray>>
-      rt_buffer_ptr_;
 
   // hardware interfaces
   std::vector<
