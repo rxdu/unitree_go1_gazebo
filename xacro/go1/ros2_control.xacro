@@ -159,7 +159,7 @@
             <always_on>1</always_on>
             <update_rate>500</update_rate>
             <visualize>true</visualize>
-            <topic>imu</topic>
+            <topic>sensor/imu</topic>
             <imu>
                 <angular_velocity>
                     <x>

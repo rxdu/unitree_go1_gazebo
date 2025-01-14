@@ -11,9 +11,9 @@
                 <always_on>1</always_on>
                 <update_rate>500</update_rate>
                 <visualize>true</visualize>
+                <topic>sensor/force_torque_sensor/${name}_ft_sensor</topic>
                 <force_torque>
                     <frame>child</frame>
-                    <!--                <measure_direction>child_to_parent</measure_direction>-->
                 </force_torque>
             </sensor>
         </gazebo>
