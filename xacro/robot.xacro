@@ -5,6 +5,7 @@
     <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
     <xacro:arg name="DEBUG" default="false"/>
     <xacro:arg name="GAZEBO" default="false"/>
+    <xacro:arg name="CONTROLLER_CONFIG" default="$(find unitree_go1_gazebo)/config/controller.yaml"/>
 
     <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/const.xacro"/>
     <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/materials.xacro"/>
@@ -17,7 +18,9 @@
     </xacro:include>
     <xacro:if value="$(arg GAZEBO)">
         <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/gazebo.xacro"/>
-        <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/ros2_control.xacro"/>
+        <xacro:include filename="$(find unitree_go1_gazebo)/xacro/go1/ros2_control.xacro">
+            <xacro:arg name="CONTROLLER_CONFIG" value="${CONTROLLER_CONFIG}"/>
+        </xacro:include>
     </xacro:if>
 
     <!-- robot base links -->

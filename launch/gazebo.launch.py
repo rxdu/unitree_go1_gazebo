@@ -26,7 +26,8 @@ def launch_setup(context, *args, **kwargs):
     robot_description = (
         xacro.process_file(xacro_file, mappings={
             'DEBUG': 'false',
-            'GAZEBO': 'true'
+            'GAZEBO': 'true',
+            'CONTROLLER_CONFIG': '$(find unitree_go1_gazebo)/config/controller.yaml'
         }).toxml())
 
     # create nodes
