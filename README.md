@@ -12,7 +12,7 @@ the real robot, allowing users to easily develop programs with the simulation fi
 
 <img src="docs/screenshots/go1_gazebo.png" height="250"> <img src="docs/screenshots/go1_ft_sensor.png" height="250">
 
-This repository also serves as a reference for creating a Gazebo simulation for any robot. You can find
+This repository also serves as a reference for creating a Gazebo (ignition) simulation for any robot. You can find
 documentation of the simulation setup process in [SETUP.md](docs/SETUP.md).
 
 ## Supported platform
@@ -71,3 +71,91 @@ colcon build --event-handlers console_direct+ --symlink-install --cmake-args -DC
 
 Note that the "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON" option is used to generate the compile_commands.json file for the
 Code Editor/IDE (e.g. Visual Studio Code, Clion).
+
+## Launch the simulator
+
+```bash
+ros2 launch unitree_go1_gazebo gazebo.launch.py
+```
+
+## Control interface
+
+With the above setup, you will get the following hardware interfaces for your ros2_control controllers:
+
+```bash
+$ ros2 control list_hardware_interfaces 
+command interfaces
+        FL_calf_joint/effort [available] [claimed]
+        FL_hip_joint/effort [available] [claimed]
+        FL_thigh_joint/effort [available] [claimed]
+        FR_calf_joint/effort [available] [claimed]
+        FR_hip_joint/effort [available] [claimed]
+        FR_thigh_joint/effort [available] [claimed]
+        RL_calf_joint/effort [available] [claimed]
+        RL_hip_joint/effort [available] [claimed]
+        RL_thigh_joint/effort [available] [claimed]
+        RR_calf_joint/effort [available] [claimed]
+        RR_hip_joint/effort [available] [claimed]
+        RR_thigh_joint/effort [available] [claimed]
+        leg_joint_controller/FL_calf_joint/effort [available] [unclaimed]
+        leg_joint_controller/FL_calf_joint/kd [available] [unclaimed]
+        leg_joint_controller/FL_calf_joint/kp [available] [unclaimed]
+        leg_joint_controller/FL_calf_joint/position [available] [unclaimed]
+        leg_joint_controller/FL_calf_joint/velocity [available] [unclaimed]
+        leg_joint_controller/FL_hip_joint/effort [available] [unclaimed]
+        leg_joint_controller/FL_hip_joint/kd [available] [unclaimed]
+        leg_joint_controller/FL_hip_joint/kp [available] [unclaimed]
+        leg_joint_controller/FL_hip_joint/position [available] [unclaimed]
+        leg_joint_controller/FL_hip_joint/velocity [available] [unclaimed]
+        leg_joint_controller/FL_thigh_joint/effort [available] [unclaimed]
+        leg_joint_controller/FL_thigh_joint/kd [available] [unclaimed]
+        leg_joint_controller/FL_thigh_joint/kp [available] [unclaimed]
+        leg_joint_controller/FL_thigh_joint/position [available] [unclaimed]
+        leg_joint_controller/FL_thigh_joint/velocity [available] [unclaimed]
+        ...
+        [similiar leg_joint_controller interfaces for other legs]
+        ...
+state interfaces
+        FL_calf_joint/effort
+        FL_calf_joint/position
+        FL_calf_joint/velocity
+        FL_ft_sensor/force.x
+        FL_ft_sensor/force.y
+        FL_ft_sensor/force.z
+        FL_ft_sensor/torque.x
+        FL_ft_sensor/torque.y
+        FL_ft_sensor/torque.z
+        FL_hip_joint/effort
+        FL_hip_joint/position
+        FL_hip_joint/velocity
+        FL_thigh_joint/effort
+        FL_thigh_joint/position
+        FL_thigh_joint/velocity
+        ...
+        [similiar joint state interfaces for other legs]
+        ...
+        imu_sensor/angular_velocity.x
+        imu_sensor/angular_velocity.y
+        imu_sensor/angular_velocity.z
+        imu_sensor/linear_acceleration.x
+        imu_sensor/linear_acceleration.y
+        imu_sensor/linear_acceleration.z
+        imu_sensor/orientation.w
+        imu_sensor/orientation.x
+        imu_sensor/orientation.y
+        imu_sensor/orientation.z
+        fl_ft_sensor_broadcaster/FL_ft_sensor/force.x
+        fl_ft_sensor_broadcaster/FL_ft_sensor/force.y
+        fl_ft_sensor_broadcaster/FL_ft_sensor/force.z
+        fl_ft_sensor_broadcaster/FL_ft_sensor/torque.x
+        fl_ft_sensor_broadcaster/FL_ft_sensor/torque.y
+        fl_ft_sensor_broadcaster/FL_ft_sensor/torque.z
+        ...
+        [similiar ft sensor broadcaster interfaces for other legs]
+        ...
+```
+
+You may consider using the [`unitree_api_adapter`](https://github.com/rxdu/unitree_api_adapter.git) controller plugin to
+expose ROS2/DDS topic interfaces (e.g. `/lowcmd`, `/lowstate` topics), with which you can test your own low-level
+controller in the same way as the real robot. Please note that unless you implement your own low-level controller, the
+simulated robot won't respond to the high-level commands defined in the interface.
